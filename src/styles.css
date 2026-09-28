@@ -1,0 +1,545 @@
+/* ---------- Tokens ---------- */
+:root {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Fraunces', Georgia, serif;
+  --ink: #16181d;
+  --muted: #5d6270;
+  --subtle: #8a8f9c;
+  --line: #d9dbe0;
+  --bg: #f8f8f6;
+  --surface: #fff;
+  --danger: #c0262d;
+  /* AHM Pasti logo reds */
+  --accent: #c50000;
+  --accent-hover: #a30000;
+  --accent-soft: #fce8e8;
+  --accent-bright: #ed1b2f;
+  --radius: 10px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- Shared pieces ---------- */
+.logo {
+  display: block;
+  align-self: flex-start;
+  width: auto;
+  height: 44px;
+}
+
+.card {
+  background: var(--surface);
+  border-radius: 16px;
+}
+
+.title {
+  margin: 0 0 8px;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+}
+
+.subtitle {
+  margin: 0 0 22px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.field-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.input-wrap {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  height: 34px;
+  padding: 0 12px;
+  font: inherit;
+  font-size: 13px;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.input::placeholder {
+  color: var(--subtle);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+.input-has-trailing {
+  padding-right: 40px;
+}
+
+.input-invalid {
+  border-color: var(--danger);
+}
+
+.field-error {
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: var(--danger);
+}
+
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  color: var(--subtle);
+  cursor: pointer;
+}
+
+.password-toggle:hover {
+  color: var(--ink);
+}
+
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.checkbox input {
+  width: 14px;
+  height: 14px;
+  margin: 0;
+  accent-color: var(--accent);
+}
+
+.row-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.link {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.forgot {
+  position: relative;
+}
+
+.forgot-pop {
+  position: absolute;
+  z-index: 5;
+  top: calc(100% + 6px);
+  right: 0;
+  width: 240px;
+  padding: 10px 12px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.45;
+  color: #fff;
+  background: var(--ink);
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgb(0 0 0 / 0.15);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 36px;
+  margin-top: 4px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--accent);
+  border: 0;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.btn-primary:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  outline-offset: 2px;
+}
+
+.btn-primary:disabled {
+  opacity: 0.7;
+  cursor: progress;
+}
+
+.spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgb(255 255 255 / 0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 12px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--danger);
+  background: #fdecec;
+  border: 1px solid #f6caca;
+  border-radius: 8px;
+}
+
+.alert svg {
+  flex: none;
+  margin-top: 1px;
+}
+
+.foot-note {
+  margin: 22px 0 0;
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.foot-note strong {
+  color: var(--accent);
+}
+
+.api-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.api-status .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--subtle);
+}
+
+.api-status-up .dot {
+  background: #1f9d55;
+  box-shadow: 0 0 0 3px rgb(31 157 85 / 0.18);
+}
+
+.api-status-down .dot {
+  background: var(--danger);
+  box-shadow: 0 0 0 3px rgb(192 38 45 / 0.18);
+}
+
+.api-status-checking .dot {
+  animation: pulse 1s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+  to {
+    opacity: 0.3;
+  }
+}
+
+.api-status-dark {
+  color: rgb(255 255 255 / 0.75);
+}
+
+/* ---------- Design 1: Hero overlap ---------- */
+.hero-page {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-band {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 45vh;
+  min-height: 260px;
+  background: var(--accent);
+  overflow: hidden;
+}
+
+.hero-ring {
+  position: absolute;
+  top: -60px;
+  right: 7%;
+  width: 196px;
+  height: 196px;
+  border: 1px solid rgb(255 255 255 / 0.35);
+  border-radius: 50%;
+}
+
+.hero-bubble {
+  position: absolute;
+  top: 45px;
+  right: 25%;
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.15);
+}
+
+.hero-tile {
+  position: absolute;
+  bottom: -14px;
+  left: 9%;
+  width: 72px;
+  height: 72px;
+  border-radius: 14px;
+  background: rgb(255 255 255 / 0.15);
+  transform: rotate(12deg);
+}
+
+.hero-top {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 36px;
+}
+
+.hero-help {
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.hero-card {
+  position: relative;
+  width: min(344px, calc(100% - 32px));
+  margin-top: max(40px, calc(45vh - 180px));
+  padding: 30px 33px 26px;
+  border: 1px solid rgb(0 0 0 / 0.04);
+  box-shadow: 0 24px 48px -16px rgb(30 20 10 / 0.2), 0 2px 6px rgb(0 0 0 / 0.04);
+}
+
+.hero-icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.hero-footer {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin: auto 0 0;
+  padding: 36px 16px 70px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+}
+
+/* ---------- Design 2: Split screen ---------- */
+.split-page {
+  display: grid;
+  grid-template-columns: minmax(320px, 40%) 1fr;
+  min-height: 100vh;
+}
+
+.split-aside {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 36px;
+  color: #fff;
+  background: #15161a;
+  overflow: hidden;
+}
+
+.split-ring {
+  position: absolute;
+  top: -110px;
+  right: -40px;
+  width: 280px;
+  height: 280px;
+  border: 1px solid color-mix(in srgb, var(--accent-bright) 55%, transparent);
+  border-radius: 50%;
+}
+
+.split-blob {
+  position: absolute;
+  bottom: -80px;
+  left: -60px;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent-bright) 25%, transparent);
+}
+
+.split-pitch {
+  position: relative;
+  margin: auto 0;
+}
+
+.split-pitch h2 {
+  margin: 0 0 18px;
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: clamp(24px, 2.6vw, 30px);
+  line-height: 1.2;
+}
+
+.split-pitch p {
+  max-width: 280px;
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgb(255 255 255 / 0.7);
+}
+
+.split-bottom {
+  position: relative;
+  padding-top: 22px;
+  border-top: 1px solid rgb(255 255 255 / 0.12);
+}
+
+.split-caption {
+  margin: 6px 0 0;
+  font-size: 11px;
+  color: rgb(255 255 255 / 0.45);
+}
+
+.split-main {
+  display: grid;
+  place-items: center;
+  padding: 48px 24px 80px;
+  background: var(--surface);
+}
+
+.split-form {
+  width: min(286px, 100%);
+}
+
+@media (max-width: 760px) {
+  .split-page {
+    grid-template-columns: 1fr;
+  }
+
+  .split-aside {
+    padding: 24px;
+    gap: 24px;
+  }
+
+  .split-pitch {
+    margin: 0;
+  }
+}
+
+/* ---------- Design 3: Minimal ---------- */
+.minimal-page {
+  min-height: 100vh;
+  padding: 36px 24px 80px;
+}
+
+.minimal-top {
+  margin-bottom: 36px;
+  padding-left: 24px;
+}
+
+.minimal-card {
+  width: min(344px, 100%);
+  margin: 0 auto;
+  padding: 34px 30px 30px;
+  border: 1px solid #e3e4e8;
+}
+
+.minimal-card .title {
+  font-size: 22px;
+}
+
