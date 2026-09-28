@@ -1,5 +1,5 @@
 // Client for the INT-Hub Auth endpoints.
-// Docs: http://34.160.82.207/swagger-ui/index.html (see docs/API.md)
+// Docs: <API_PROXY_TARGET>/swagger-ui/index.html (see docs/API.md)
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL ?? ''
 const STORAGE_KEY = 'pasti.session'

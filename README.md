@@ -6,6 +6,7 @@ Detail API: [docs/API.md](docs/API.md).
 
 ```bash
 npm install
+cp .env.example .env   # isi API_PROXY_TARGET dengan alamat backend INT-Hub
 npm run dev
 ```
 

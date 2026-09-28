@@ -1,7 +1,9 @@
 # Portal PASTI — API (INT-Hub)
 
-- **Swagger UI:** http://34.160.82.207/swagger-ui/index.html
-- **OpenAPI JSON:** http://34.160.82.207/v3/api-docs
+Alamat backend disimpan di `.env` (`API_PROXY_TARGET`), tidak di repo. Lihat `.env.example`.
+
+- **Swagger UI:** `<API_PROXY_TARGET>/swagger-ui/index.html`
+- **OpenAPI JSON:** `<API_PROXY_TARGET>/v3/api-docs`
 - **Title:** INT-Hub API v1 — "INT-Hub backend for AHM: lead data ingestion towards Portal PASTI."
 - **Auth:** `Authorization: Bearer <accessToken>` (JWT). Only the `Auth` endpoints are public.
 
@@ -35,7 +37,7 @@ ApiErrorResponse    { timestamp; status; error; message; path; fieldErrors?: { f
 ## Catatan integrasi
 
 - Server **tidak mengirim header CORS** (dicek 2026-09-28). Frontend memanggil `/int/*` di origin sendiri dan
-  Vite mem-proxy ke backend (`vite.config.ts`, `API_PROXY_TARGET`). Di produksi perlu reverse proxy yang sama
+  Vite mem-proxy ke backend (`vite.config.ts`, `API_PROXY_TARGET` di `.env`). Di produksi perlu reverse proxy yang sama
   atau backend mengaktifkan CORS.
 - Tidak ada endpoint registrasi publik, lupa kata sandi, atau OAuth. User dibuat oleh admin lewat `/user/add`,
   jadi UI login mengarahkan ke administrator untuk kasus tersebut.
