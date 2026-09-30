@@ -1,5 +1,5 @@
 // Protected INT-Hub endpoints used by the dashboard. See docs/API.md.
-import { apiJson, publicPost } from './auth'
+import { apiJson } from './auth'
 
 /** SIP = Sending in Progress, ACP = Accepted, REJ = Rejected, URV = Under revision, REV = Revised, ERR = Error in sending. */
 export const LEAD_STATUSES = ['SIP', 'ACP', 'REJ', 'URV', 'REV', 'ERR'] as const
@@ -118,9 +118,12 @@ export function checkBatchStatus() {
   return apiJson<BatchStatusCheck>('/int/v1/data/status')
 }
 
-/** POST /int/v1/auth/pasti-test — public; 200 text on success, 401/502 on failure. */
+/**
+ * POST /int/v1/auth/pasti-test — 200 text on success, 401/502 on failure.
+ * Documented as public, but the deployed backend rejects it without a bearer token.
+ */
 export function testPastiConnection() {
-  return publicPost<string>('/int/v1/auth/pasti-test')
+  return apiJson<string>('/int/v1/auth/pasti-test', 'POST')
 }
 
 /** UserResponse */

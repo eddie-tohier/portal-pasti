@@ -193,11 +193,6 @@ export async function apiJson<T>(path: string, method: 'GET' | 'POST' = 'GET', b
   return parseResponse<T>(await authFetch(path, init))
 }
 
-/** Public POST that may answer in plain text (e.g. /auth/pasti-test). */
-export function publicPost<T>(path: string): Promise<T> {
-  return request<T>(path, { method: 'POST' })
-}
-
 /** Reads the `exp` claim of the access token, if present. */
 export function tokenExpiry(accessToken: string): Date | null {
   try {
