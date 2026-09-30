@@ -8,8 +8,9 @@ COPY . .
 ENV VITE_API_BASE_URL=
 RUN npm run build
 
-# Serve with nginx; API_PROXY_TARGET is substituted into the template at startup.
-FROM nginx:1.27.5-alpine
+# Serve with nginx as non-root (uid 101), same base as the running 1.1 image.
+# API_PROXY_TARGET is substituted into the template at startup.
+FROM nginxinc/nginx-unprivileged:1.27.5-alpine
 COPY deploy/default.conf.template /etc/nginx/templates/default.conf.template
 COPY --from=build /app/dist /usr/share/nginx/html
 EXPOSE 8080
